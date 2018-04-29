@@ -2925,27 +2925,6 @@ public:
   }
 #endif
 
-void test_update_vec_score_rank()
-{
-  vector<t_score> arr;
-  qap_add_back(arr).id=arr.size();
-  qap_add_back(arr).id=arr.size();
-  qap_add_back(arr).id=arr.size();
-  qap_add_back(arr).id=arr.size();
-
-  qap_add_back(arr).id=arr.size();arr.back().total_score=10;
-  qap_add_back(arr).id=arr.size();arr.back().total_score=20;
-  qap_add_back(arr).id=arr.size();arr.back().total_score=5;
-  qap_add_back(arr).id=arr.size();arr.back().total_score=5;
-  qap_add_back(arr).id=arr.size();arr.back().total_score=5;
-  qap_add_back(arr).id=arr.size();arr.back().total_score=1;
-  qap_add_back(arr).id=arr.size();arr.back().total_score=-1;
-
-  qap_sort(arr);
-  t_strategy::update_vec_score_rank(arr);
-  int gg=1;
-}
-
 int main()
 {
   //perror("build at 2018.04.29 20:22:19 commit 2dac6bb4e96029384c6b608910aaa283de5d8826");
