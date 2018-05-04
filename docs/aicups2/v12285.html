@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>table_gen JS</title>
+<style type="text/css">
+  table{border-collapse:collapse;font-size:10pt;}
+  thead{background:#ccc;text-align:center;font-weight:bold;}
+  td,thead{border:1px solid #800;padding:4px;}
+  textarea[readonly="readonly"]{background-color:#e8e8e8;}
+</style>
+<script>
+  function escapeHtml(text)
+  {
+    if("string"!=(typeof text)){return text;}
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+  }
+  function inc(map,key){if(!(key in map)){map[key]=0;}map[key]++;}
+  function PrintMyTable(table)
+  {
+    function skip_field(field){
+      var ignore=[];//["user_agent","request_uri","referrer"];
+      for(var key in ignore)if(ignore[key]==field){return true;}
+      return false;
+    };
+    var def_table=[{'id':1,'nick':'Owen'},{'id':2,'nick':'Kyle'}];
+    if(!table.length){return 'table is empty';}
+    if(!Object.keys(table[0]).length){return 'table is empty';}
+    var km={};for(var i=0;i<table.length;i++){var ex=table[i];for(var k in ex){inc(km,k);}}
+    var arr=Object.keys(km);
+    var out="";var head="";
+    for(var i in arr)
+    {
+      if(skip_field(arr[i]))continue;
+      out+='<td>'+escapeHtml(arr[i])+'</td>';
+    }
+    var head='<thead><tr>'+out+'</tr></thead>';
+    out="";
+    for(var i=0;i<table.length;i++)
+    {
+      var tmp="";
+      //var tmp_arr=table[table.length-i-1];
+      var tmp_arr=table[i];
+      for(var j=0;j<arr.length;j++){
+        //if(skip_field(key))continue;
+        var k=arr[j];var v="<b>0</b>";var bg="";
+        if(k in tmp_arr){v=escapeHtml(tmp_arr[k]);}else{/*bg='class="bgw"';*/}
+        tmp+='<td>'+v+'</td>';
+      }
+      out+='<tr>'+tmp+'</tr>';
+    }
+    out='<table>'+head+'<tbody align="right">'+out+'</tbody></table>';
+    return out;
+  }
+  function draw(arr){document.getElementById("out").innerHTML=PrintMyTable(arr);}
+</script>
+</head>
+<body><pre name="out" id="out"></pre><script>document.title+='(zqn2)';draw([{"n":1,"user":"stem(12231)","_0":2,"_1":0,"_2":0,"_3":0,"score":6,"score\/game":"3.00","games":2,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":1,"t._3":0,"t.score":3,"t.score\/game":"1.50","win_rate-t.win_rate":"100.00%"},{"n":2,"user":"Клапауций Станиславович(12031)","_0":1,"_1":0,"_2":0,"_3":0,"score":3,"score\/game":"3.00","games":1,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":0,"t._3":1,"t.score":0,"t.score\/game":"0.00","win_rate-t.win_rate":"100.00%"},{"n":3,"user":"tyamgin(12214)","_0":1,"_1":0,"_2":0,"_3":0,"score":3,"score\/game":"3.00","games":1,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":0,"t.score":1,"t.score\/game":"1.00","win_rate-t.win_rate":"100.00%"},{"n":4,"user":"Палочка Кишечная(12058)","_0":1,"_1":0,"_2":0,"_3":0,"score":3,"score\/game":"3.00","games":1,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":0,"t._3":0,"t.score":2,"t.score\/game":"2.00","win_rate-t.win_rate":"100.00%"},{"n":5,"user":"Adler(12286)","_0":2,"_1":0,"_2":0,"_3":0,"score":6,"score\/game":"3.00","games":2,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":1,"t.score":1,"t.score\/game":"0.50","win_rate-t.win_rate":"100.00%"},{"n":6,"user":"Leos(11453)","_0":2,"_1":0,"_2":0,"_3":0,"score":6,"score\/game":"3.00","games":2,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":1,"t._3":0,"t.score":3,"t.score\/game":"1.50","win_rate-t.win_rate":"100.00%"},{"n":7,"user":"T1024(12253)","_0":1,"_1":0,"_2":0,"_3":0,"score":3,"score\/game":"3.00","games":1,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":0,"t.score":1,"t.score\/game":"1.00","win_rate-t.win_rate":"100.00%"},{"n":8,"user":"ud1(12246)","_0":1,"_1":0,"_2":0,"_3":0,"score":3,"score\/game":"3.00","games":1,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":0,"t._3":1,"t.score":0,"t.score\/game":"0.00","win_rate-t.win_rate":"100.00%"},{"n":9,"user":"TonyK(12312)","_0":1,"_1":0,"_2":0,"_3":0,"score":3,"score\/game":"3.00","games":1,"win_rate":"100.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":0,"t.score":1,"t.score\/game":"1.00","win_rate-t.win_rate":"100.00%"},{"n":10,"user":"Olegathor(10491)","_0":2,"_1":1,"_2":0,"_3":0,"score":8,"score\/game":"2.67","games":3,"win_rate":"66.67%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":3,"t._3":0,"t.score":3,"t.score\/game":"1.00","win_rate-t.win_rate":"66.67%"},{"n":11,"user":"mortido(12215)","_0":2,"_1":1,"_2":0,"_3":0,"score":8,"score\/game":"2.67","games":3,"win_rate":"66.67%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":2,"t._3":1,"t.score":2,"t.score\/game":"0.67","win_rate-t.win_rate":"66.67%"},{"n":12,"user":"Pumba(12300)","_0":1,"_1":1,"_2":0,"_3":0,"score":5,"score\/game":"2.50","games":2,"win_rate":"50.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":1,"t.score":1,"t.score\/game":"0.50","win_rate-t.win_rate":"50.00%"},{"n":13,"user":"HiPravin(12026)","_0":1,"_1":2,"_2":0,"_3":0,"score":7,"score\/game":"2.33","games":3,"win_rate":"33.33%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":1,"t._3":1,"t.score":3,"t.score\/game":"1.00","win_rate-t.win_rate":"33.33%"},{"n":14,"user":"WatsOne(12111)","_0":0,"_1":2,"_2":0,"_3":1,"score":4,"score\/game":"1.33","games":3,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":2,"t._3":1,"t.score":2,"t.score\/game":"0.67","win_rate-t.win_rate":"0.00%"},{"n":15,"user":"xytop(11937)","_0":0,"_1":1,"_2":0,"_3":1,"score":2,"score\/game":"1.00","games":2,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":1,"t._3":0,"t.score":3,"t.score\/game":"1.50","win_rate-t.win_rate":"0.00%"},{"n":16,"user":"Alex(11751)","_0":0,"_1":0,"_2":0,"_3":2,"score":0,"score\/game":"0.00","games":2,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":2,"t._3":0,"t.score":2,"t.score\/game":"1.00","win_rate-t.win_rate":"0.00%"},{"n":17,"user":"Андр Дрозд(10387)","_0":0,"_1":0,"_2":0,"_3":1,"score":0,"score\/game":"0.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":0,"t._3":0,"t.score":2,"t.score\/game":"2.00","win_rate-t.win_rate":"0.00%"},{"n":18,"user":"slava_sh(10356)","_0":0,"_1":0,"_2":0,"_3":1,"score":0,"score\/game":"0.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":0,"t._3":0,"t.score":2,"t.score\/game":"2.00","win_rate-t.win_rate":"0.00%"},{"n":19,"user":"Opera(12199)","_0":0,"_1":0,"_2":1,"_3":0,"score":1,"score\/game":"1.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":0,"t._3":0,"t.score":2,"t.score\/game":"2.00","win_rate-t.win_rate":"0.00%"},{"n":20,"user":"Иван Дашкевич(12201)","_0":0,"_1":1,"_2":0,"_3":0,"score":2,"score\/game":"2.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":0,"t.score":1,"t.score\/game":"1.00","win_rate-t.win_rate":"0.00%"},{"n":21,"user":"dbf(12150)","_0":0,"_1":0,"_2":1,"_3":2,"score":1,"score\/game":"0.33","games":3,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":2,"t._3":0,"t.score":4,"t.score\/game":"1.33","win_rate-t.win_rate":"0.00%"},{"n":22,"user":"Viers(12257)","_0":0,"_1":1,"_2":0,"_3":0,"score":2,"score\/game":"2.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":0,"t._3":1,"t.score":0,"t.score\/game":"0.00","win_rate-t.win_rate":"0.00%"},{"n":23,"user":"anton_sh(12197)","_0":0,"_1":1,"_2":0,"_3":0,"score":2,"score\/game":"2.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":0,"t.score":1,"t.score\/game":"1.00","win_rate-t.win_rate":"0.00%"},{"n":24,"user":"Батончик Шоколадный(10609)","_0":0,"_1":0,"_2":0,"_3":1,"score":0,"score\/game":"0.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":1,"t._3":0,"t.score":1,"t.score\/game":"1.00","win_rate-t.win_rate":"0.00%"},{"n":25,"user":"Александр Поповцев(12076)","_0":0,"_1":0,"_2":1,"_3":0,"score":1,"score\/game":"1.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":0,"t._3":0,"t.score":2,"t.score\/game":"2.00","win_rate-t.win_rate":"0.00%"},{"n":26,"user":"alex3d(12308)","_0":0,"_1":0,"_2":1,"_3":0,"score":1,"score\/game":"1.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":0,"t._2":0,"t._3":1,"t.score":0,"t.score\/game":"0.00","win_rate-t.win_rate":"0.00%"},{"n":27,"user":"qoo2p5(11366)","_0":0,"_1":0,"_2":0,"_3":1,"score":0,"score\/game":"0.00","games":1,"win_rate":"0.00%","t.win_rate":"0.00%","t._0":0,"t._1":1,"t._2":0,"t._3":0,"t.score":2,"t.score\/game":"2.00","win_rate-t.win_rate":"0.00%"},{"n":28,"user":"Predelnik(12285)","_0":4,"_1":5,"_2":10,"_3":5,"score":32,"score\/game":"1.33","games":24,"win_rate":"16.67%","t.win_rate":"16.67%","t._0":4,"t._1":5,"t._2":10,"t._3":5,"t.score":32,"t.score\/game":"1.33","win_rate-t.win_rate":"0.00%"},{"n":29,"user":"Александр Ефремов(12189)","_0":1,"_1":1,"_2":1,"_3":0,"score":6,"score\/game":"2.00","games":3,"win_rate":"33.33%","t.win_rate":"33.33%","t._0":1,"t._1":1,"t._2":0,"t._3":1,"t.score":5,"t.score\/game":"1.67","win_rate-t.win_rate":"0.00%"},{"n":30,"user":"band(12100)","_0":1,"_1":0,"_2":1,"_3":2,"score":4,"score\/game":"1.00","games":4,"win_rate":"25.00%","t.win_rate":"25.00%","t._0":1,"t._1":0,"t._2":3,"t._3":0,"t.score":6,"t.score\/game":"1.50","win_rate-t.win_rate":"0.00%"},{"n":31,"user":"ryzhikovas(11414)","_0":0,"_1":1,"_2":3,"_3":0,"score":5,"score\/game":"1.25","games":4,"win_rate":"0.00%","t.win_rate":"25.00%","t._0":1,"t._1":2,"t._2":0,"t._3":1,"t.score":7,"t.score\/game":"1.75","win_rate-t.win_rate":"-25.00%"},{"n":32,"user":"Zinya(12279)","_0":0,"_1":2,"_2":1,"_3":0,"score":5,"score\/game":"1.67","games":3,"win_rate":"0.00%","t.win_rate":"33.33%","t._0":1,"t._1":0,"t._2":0,"t._3":2,"t.score":3,"t.score\/game":"1.00","win_rate-t.win_rate":"-33.33%"},{"n":33,"user":"Y(12313)","_0":0,"_1":1,"_2":0,"_3":2,"score":2,"score\/game":"0.67","games":3,"win_rate":"0.00%","t.win_rate":"33.33%","t._0":1,"t._1":0,"t._2":2,"t._3":0,"t.score":5,"t.score\/game":"1.67","win_rate-t.win_rate":"-33.33%"},{"n":34,"user":"TongoHiti(12144)","_0":0,"_1":1,"_2":2,"_3":1,"score":4,"score\/game":"1.00","games":4,"win_rate":"0.00%","t.win_rate":"50.00%","t._0":2,"t._1":1,"t._2":0,"t._3":1,"t.score":8,"t.score\/game":"2.00","win_rate-t.win_rate":"-50.00%"},{"n":35,"user":"phyrionom(12061)","_0":0,"_1":1,"_2":1,"_3":0,"score":3,"score\/game":"1.50","games":2,"win_rate":"0.00%","t.win_rate":"50.00%","t._0":1,"t._1":0,"t._2":1,"t._3":0,"t.score":4,"t.score\/game":"2.00","win_rate-t.win_rate":"-50.00%"},{"n":36,"user":"Sanders(12241)","_0":0,"_1":0,"_2":0,"_3":3,"score":0,"score\/game":"0.00","games":3,"win_rate":"0.00%","t.win_rate":"66.67%","t._0":2,"t._1":0,"t._2":1,"t._3":0,"t.score":7,"t.score\/game":"2.33","win_rate-t.win_rate":"-66.67%"},{"n":37,"user":"Daramant(12317)","_0":0,"_1":1,"_2":1,"_3":1,"score":3,"score\/game":"1.00","games":3,"win_rate":"0.00%","t.win_rate":"66.67%","t._0":2,"t._1":0,"t._2":0,"t._3":1,"t.score":6,"t.score\/game":"2.00","win_rate-t.win_rate":"-66.67%"}]);</script></body></html>
